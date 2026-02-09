@@ -2,288 +2,223 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Instagram Valentine 💖</title>
+<title>Valentine 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-}
-
+/* ---------- BASE ---------- */
 body{
-  background:#000;
+  margin:0;
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
+  background:#fafafa;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;
   overflow:hidden;
 }
 
-/* PHONE */
-.phone{
-  width:390px;
-  height:100vh;
-  max-height:760px;
+/* ---------- FLOATING HEARTS ---------- */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  animation:floatUp linear forwards;
+  opacity:0.7;
+  pointer-events:none;
+}
+
+@keyframes floatUp{
+  to{
+    transform:translateY(-110vh);
+    opacity:0;
+  }
+}
+
+/* ---------- POST CARD ---------- */
+.post{
+  width:360px;
   background:#fff;
-  border-radius:26px;
+  border:1px solid #dbdbdb;
+  border-radius:14px;
   overflow:hidden;
-  position:relative;
+  z-index:10;
 }
 
-/* HEADER */
+/* ---------- HEADER ---------- */
 .header{
-  height:64px;
   display:flex;
   align-items:center;
-  padding:0 14px;
-  border-bottom:1px solid #eee;
+  padding:12px;
 }
 
 .avatar{
-  width:38px;
-  height:38px;
+  width:36px;
+  height:36px;
   border-radius:50%;
-  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+  background:linear-gradient(45deg,#ff006a,#ffb700);
   padding:2px;
 }
-.avatar div{
+
+.avatar img{
   width:100%;
   height:100%;
-  background:#ccc;
   border-radius:50%;
+  background:#fff;
 }
 
 .username{
   margin-left:10px;
   font-weight:600;
+  font-size:14px;
 }
 
-/* CHAT */
-.chat{
-  padding:20px;
-  height:calc(100% - 64px);
-}
-
-/* BUBBLE */
-.bubble{
-  background:#f1f1f1;
-  padding:14px 16px;
-  border-radius:18px;
-  max-width:85%;
-  font-size:15px;
-  margin-bottom:12px;
-}
-
-/* INPUT */
-input{
+/* ---------- IMAGE ---------- */
+.image{
   width:100%;
-  padding:14px;
-  border-radius:18px;
-  border:1px solid #ddd;
-  font-size:15px;
-  margin-top:20px;
+  height:220px;
+  background:url("https://picsum.photos/500/500") center/cover;
 }
 
-/* BUTTONS */
-.actions{
+/* ---------- CONTENT ---------- */
+.content{
+  padding:14px;
+}
+
+.content p{
+  font-size:14px;
+  line-height:1.4;
+  margin-bottom:18px;
+}
+
+/* ---------- BUTTONS ---------- */
+.buttons{
   position:relative;
-  height:170px;
-  margin-top:30px;
+  height:140px;
 }
 
 button{
+  padding:10px 26px;
   border:none;
-  padding:12px 36px;
-  border-radius:30px;
+  border-radius:25px;
   font-size:15px;
   cursor:pointer;
 }
 
-#yes{
+#yesBtn{
   background:#0095f6;
-  color:white;
-  transition:transform .25s ease;
+  color:#fff;
+  transition:0.3s;
 }
 
-#no{
-  background:#ed4956;
-  color:white;
+#noBtn{
+  background:#efefef;
+  color:#262626;
   position:absolute;
   left:50%;
   top:80px;
   transform:translateX(-50%);
-  transition:left .12s ease, top .12s ease;
 }
-
-/* POPUP */
-.popup{
-  position:absolute;
-  top:45%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:#0095f6;
-  color:#fff;
-  padding:14px 26px;
-  border-radius:30px;
-  font-weight:600;
-  animation:pop .4s ease;
-  z-index:10;
-}
-
-@keyframes pop{
-  from{opacity:0; transform:translate(-50%,-50%) scale(.7)}
-  to{opacity:1; transform:translate(-50%,-50%) scale(1)}
-}
-
-/* HEARTS */
-.heart{
-  position:fixed;
-  bottom:20px;
-  font-size:22px;
-  animation:float 2.8s linear forwards;
-}
-
-@keyframes float{
-  to{
-    transform:translateY(-100vh);
-    opacity:0;
-  }
-}
-
-.hidden{display:none;}
 </style>
 </head>
 
 <body>
 
-<div class="phone">
+<div class="post">
 
+  <!-- HEADER -->
   <div class="header">
-    <div class="avatar"><div></div></div>
+    <div class="avatar">
+      <img src="https://i.pravatar.cc/100" alt="">
+    </div>
     <div class="username">_.bo.by</div>
   </div>
 
-  <!-- LOGIN -->
-  <div class="chat" id="login">
-    <div class="bubble">Hey 👋 What’s your name?</div>
-    <input id="nameInput" placeholder="Type your name">
-    <button id="start" style="margin-top:20px;">Continue</button>
-  </div>
+  <!-- IMAGE -->
+  <div class="image"></div>
 
-  <!-- MAIN -->
-  <div class="chat hidden" id="main">
-    <div class="bubble" id="greet"></div>
-    <div class="bubble">
-      I would like to ask you something meaningful and sincere.<br><br>
-      Would you be my Valentine? 💖
-    </div>
+  <!-- CONTENT -->
+  <div class="content">
+    <p>
+      Would you like to make this Valentine’s Day
+      a meaningful and memorable experience together? 💖
+    </p>
 
-    <div class="actions">
-      <button id="yes">Yes 💙</button>
-      <button id="no">No ❤️</button>
+    <div class="buttons">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
     </div>
   </div>
 
 </div>
 
 <script>
-const WHATSAPP="918891959516";
-const INSTAGRAM="_.bo.by";
+/* ---------- CONFIG ---------- */
+const instagramId = "_.bo.by";
+const message =
+"💖 Best decision ever.\nI just said YES to being your Valentine!";
 
-const login=document.getElementById("login");
-const main=document.getElementById("main");
-const start=document.getElementById("start");
-const nameInput=document.getElementById("nameInput");
-const greet=document.getElementById("greet");
-const yes=document.getElementById("yes");
-const no=document.getElementById("no");
+/* ---------- ELEMENTS ---------- */
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const area = document.querySelector(".buttons");
 
-let name="";
-let scale=1;
+let scale = 1;
 
-const popMessages=[
-  "Best option 😍",
-  "Correct choice 💖",
-  "Smart decision 😉",
-  "Love wins ❤️"
-];
+/* ---------- HEART CREATOR ---------- */
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = 3 + Math.random()*2 + "s";
+  heart.style.fontSize = 14 + Math.random()*14 + "px";
+  document.body.appendChild(heart);
 
-const msgs=[
- n=>`💖 ${n} said YES to Valentine`,
- n=>`🥰 ${n} accepted my Valentine proposal`,
- n=>`💌 Love wins! ${n} chose YES`
-];
+  setTimeout(()=>heart.remove(),5000);
+}
 
-/* LOGIN */
-start.onclick=()=>{
-  name=nameInput.value.trim();
-  if(!name) return alert("Enter your name ❤️");
-  login.classList.add("hidden");
-  main.classList.remove("hidden");
-  greet.innerText=`Hey ${name} 👋`;
-};
+/* Continuous hearts */
+setInterval(createHeart, 600);
 
-/* HEARTS */
-function hearts(){
-  for(let i=0;i<18;i++){
-    const h=document.createElement("div");
-    h.className="heart";
-    h.innerText="❤️";
-    h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=2+Math.random()*1.5+"s";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),3500);
+/* Burst hearts on YES */
+function heartBurst(){
+  for(let i=0;i<15;i++){
+    setTimeout(createHeart, i*80);
   }
 }
 
-/* POPUP */
-function popup(){
-  const p=document.createElement("div");
-  p.className="popup";
-  p.innerText=popMessages[Math.floor(Math.random()*popMessages.length)];
-  document.body.appendChild(p);
-  setTimeout(()=>p.remove(),1200);
+/* ---------- NO BUTTON RUN ---------- */
+function escapeNo(){
+  const maxX = area.clientWidth - noBtn.offsetWidth;
+  const maxY = area.clientHeight - noBtn.offsetHeight;
+
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
 }
 
-/* SEND */
-function send(){
-  const msg=msgs[Math.floor(Math.random()*msgs.length)](name);
-  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,"_blank");
-  navigator.clipboard.writeText(msg);
-  window.open(`https://www.instagram.com/${INSTAGRAM}/`,"_blank");
-}
+noBtn.addEventListener("mouseover", escapeNo);
+noBtn.addEventListener("touchstart", escapeNo);
+noBtn.addEventListener("touchmove", escapeNo);
 
-/* YES */
-yes.onclick=()=>{
-  popup();
-  hearts();
-  send();
-};
+/* NO CLICK → YES BIGGER */
+noBtn.addEventListener("click", () => {
+  scale += 0.4;
+  yesBtn.style.transform = `scale(${scale})`;
+});
 
-/* FAST RUNAWAY */
-no.onmouseenter=()=>{
-  const container=no.parentElement;
-  const maxX=container.offsetWidth-no.offsetWidth;
-  const maxY=container.offsetHeight-no.offsetHeight;
-
-  const x=Math.random()*maxX;
-  const y=Math.random()*maxY;
-
-  no.style.left=x+"px";
-  no.style.top=y+"px";
-};
-
-/* NO CLICK */
-no.onclick=()=>{
-  scale+=0.4;
-  yes.style.transform=`scale(${scale})`;
-  popup();
-  hearts();
-  send();
-};
+/* YES CLICK → HEART BURST + INSTAGRAM */
+yesBtn.addEventListener("click", () => {
+  heartBurst();
+  navigator.clipboard.writeText(message).then(() => {
+    setTimeout(()=>{
+      window.open(
+        `https://www.instagram.com/${instagramId}/`,
+        "_blank"
+      );
+    },600);
+  });
+});
 </script>
 
 </body>
